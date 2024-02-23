@@ -68,6 +68,62 @@ class BST {
         if(value > head.value) return this.find_recur(value, head.right);
         return this.find_recur(value, head.left);
     }
+    BFS() {
+        if(!this.root) return;
+        let queue = [];
+        let data = [];
+        let node = this.root;
+        queue.push(node);
+        while(queue.length) {
+            node = queue.shift();
+            data.push(node.value);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+        }
+        console.log('bfs',data)
+        //return data;
+    }
+    DFSPreorder() {
+        if(!this.root) return undefined;
+        let data = [];
+        function traverse(node) {
+            data.push(node.value);
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+        }
+        traverse(this.root)
+        console.log('Preorder ',data)
+    }
+    DFSPostorder() {
+        if(!this.root) return undefined;
+        let data = [];
+        function traverse(node) {
+            if(node.left) {
+                traverse(node.left);
+            }
+            if(node.right) {
+                traverse(node.right);
+            }
+            data.push(node.value);
+        }
+        traverse(this.root);
+        console.log('Post ',data)
+    }
+    DFSInOrder() {
+        if(!this.root) return undefined;
+        let data = [];
+        function traverse(node) {
+            if(node.left) {
+                traverse(node.left);
+            }
+            data.push(node.value);
+            if(node.right) {
+                traverse(node.right);
+            }
+        }
+        traverse(this.root);
+        console.log('Inorder ',data)
+    }
 }
 
 const bstree = new BST();
